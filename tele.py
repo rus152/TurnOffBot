@@ -46,22 +46,22 @@ def main():
         but3 = types.KeyboardButton("/hiberdown")
         but4 = types.KeyboardButton("/cancel")
         markup.add(but1, but2, but3, but4)
-        if int(txt) >= 3600:
+        if int(txt) >= 18000:
             cas = int(txt) / 3600
             print(cas)
             bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часов", parse_mode='html',
                          reply_markup=markup)
 
-        if (int(txt) == 7200) or (int(txt) == 10800) or (int(txt) == 14400):
+        if (int(txt) >= 7200) and (int(txt) < 18000):
             cas = int(txt) / 3600
             print(cas)
             bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часа", parse_mode='html',
                          reply_markup=markup)
 
-        if (int(txt) == 7200) and (int(txt) == 7200):
+        if (int(txt) > 3599) and (int(txt) < 7200):
             cas = int(txt) / 3600
             print(cas)
-            bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часа", parse_mode='html',
+            bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " час", parse_mode='html',
                          reply_markup=markup)
 
         if (int(txt) > 30) and (int(txt) < 120):
@@ -80,6 +80,12 @@ def main():
             minu = int(txt) / 60
             print(minu)
             bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минут", parse_mode='html',
+                         reply_markup=markup)
+
+        if (int(txt) > 0) and (int(txt) < 31):
+            minu = int(txt) / 60
+            print(minu)
+            bot.reply_to(message, "Компьютер выключится через " + txt + " секунд", parse_mode='html',
                          reply_markup=markup)
 
         if int(txt) == 0:
