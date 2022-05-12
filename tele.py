@@ -3,7 +3,6 @@ from telebot import types
 import os
 import win10toast
 
-
 def main():
     bot = telebot.TeleBot("5308870252:AAGVqh0BSRIoywcVSTHkG0WuWAR_UXZ42PQ")
 
@@ -28,11 +27,13 @@ def main():
     @bot.message_handler(commands=['shutdown'])
     def send(message):
         sec = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        but0 = types.KeyboardButton("0")
         but1 = types.KeyboardButton("1800")
         but2 = types.KeyboardButton("3600")
         but3 = types.KeyboardButton("7200")
         but4 = types.KeyboardButton("21600")
-        sec.add(but1, but2, but3, but4)
+        but5 = types.KeyboardButton("Назад")
+        sec.add(but0, but1, but2, but3, but4, but5)
         mesg: str = bot.send_message(message.chat.id, 'Через сколько отключить компьютер?(В секундах)',
                                      parse_mode='html', reply_markup=sec)
         bot.register_next_step_handler(mesg, test)
@@ -40,12 +41,18 @@ def main():
     def test(message):
         txt = message.text
         print(txt)
+
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         but1 = types.KeyboardButton("/shutdown")
         but2 = types.KeyboardButton("/Online")
         but3 = types.KeyboardButton("/hiberdown")
         but4 = types.KeyboardButton("/cancel")
         markup.add(but1, but2, but3, but4)
+
+        if txt == "Назад":
+            bot.reply_to(message, "Возврат", parse_mode='html', reply_markup=markup)
+            return
+
         if int(txt) >= 18000:
             cas = int(txt) / 3600
             print(cas)
