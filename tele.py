@@ -40,7 +40,6 @@ def main():
     def test(message):
         txt = message.text
         print(txt)
-        os.system('shutdown /s /t ' + txt)
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         but1 = types.KeyboardButton("/shutdown")
         but2 = types.KeyboardButton("/Online")
@@ -52,11 +51,41 @@ def main():
             print(cas)
             bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часов", parse_mode='html',
                          reply_markup=markup)
-        elif int(txt) < 3600:
+
+        if (int(txt) == 7200) or (int(txt) == 10800) or (int(txt) == 14400):
+            cas = int(txt) / 3600
+            print(cas)
+            bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часа", parse_mode='html',
+                         reply_markup=markup)
+
+        if (int(txt) == 7200) and (int(txt) == 7200):
+            cas = int(txt) / 3600
+            print(cas)
+            bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часа", parse_mode='html',
+                         reply_markup=markup)
+
+        if (int(txt) > 30) and (int(txt) < 120):
+            minu = int(txt) / 60
+            print(minu)
+            bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минуту", parse_mode='html',
+                         reply_markup=markup)
+
+        if (int(txt) > 119) and (int(txt) < 300):
+            minu = int(txt) / 60
+            print(minu)
+            bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минуты", parse_mode='html',
+                         reply_markup=markup)
+
+        if (int(txt) > 299) and (int(txt) < 3600):
             minu = int(txt) / 60
             print(minu)
             bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минут", parse_mode='html',
                          reply_markup=markup)
+
+        if int(txt) == 0:
+            bot.reply_to(message, "Компьютер отключается", parse_mode='html',
+                         reply_markup=markup)
+        os.system('shutdown /s /t ' + txt)
 
     @bot.message_handler(commands=['cancel'])
     def send(message):
