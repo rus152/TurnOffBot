@@ -162,7 +162,7 @@ def main():
     def send(message):
         bot.reply_to(message, "В данный момент комп онлайн", )
         toaster = win10toast.ToastNotifier()
-        toaster.show_toast("Ботяра 🔔", "Все знают, что комп онлайн")
+        toaster.show_toast("Ботяра 🔔", "Все знают, что комп онлайн", icon_path="icon.ico")
 
     bot.polling(none_stop=True)
 
