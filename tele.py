@@ -5,7 +5,7 @@ import win10toast
 
 
 def main():
-
+    print('Made by rus152')
     try:
         f = open(os.getenv('APPDATA') + '\TurnOffBot\\token', 'r')
         f.close()
@@ -24,15 +24,16 @@ def main():
             print('')
             toknum == 0
             print(
-                'Ваш токен: ' + tokenin + '? Это верно?(Для избежания дальнейших пролем с запуском, удостоверьтесь, что токен введён правильно)')
+                'Ваш токен: ' + tokenin + '? Это верно?(Для избежания дальнейших пролем с запуском, удостоверьтесь, что токен введён правильно) \n [Да/Нет]')
             print('')
             yes_or_notnum = int()
             while yes_or_notnum < 2:
                 yes_or_not = input()
-                if yes_or_not == 'Да':
+                if (yes_or_not == 'Да') and (yes_or_not == 'да'):
                     toknum = toknum + 3
                     break
-                if yes_or_not == 'Нет':
+                if (yes_or_not == 'Нет') and (yes_or_not == 'нет'):
+                    print('')
                     break
                 else:
                     print('Введите (Да) или (Нет)')
@@ -41,13 +42,14 @@ def main():
 
         print('Первоначальная настройка завершена.')
 
+    print('')
     ff = open(os.getenv('APPDATA') + '\TurnOffBot\\token', 'r')
     token = ff.read()
     f.close()
 
     bot = telebot.TeleBot(token)
 
-    print('Типо запуск')
+    print('Бот в данный момент ОнЛайн')
 
     @bot.message_handler(commands=['start'])
     def send_welcome(message):
@@ -160,7 +162,7 @@ def main():
     def send(message):
         bot.reply_to(message, "В данный момент комп онлайн", )
         toaster = win10toast.ToastNotifier()
-        toaster.show_toast("Ботяра 🔔", "Все знают, что комп онлайн", icon_path="PC-Computer-Deltarune-Spamton.ico")
+        toaster.show_toast("Ботяра 🔔", "Все знают, что комп онлайн")
 
     bot.polling(none_stop=True)
 
