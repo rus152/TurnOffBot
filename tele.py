@@ -15,7 +15,7 @@ def main():
             os.mkdir(os.getenv('APPDATA') + '\TurnOffBot')
         except (IOError) and (Exception):
             print()
-        f = open(os.getenv('APPDATA') + '\TurnOffBot\\token', 'w')
+
         print('')
         toknum = int()
         while toknum < 3:
@@ -29,14 +29,15 @@ def main():
             yes_or_notnum = int()
             while yes_or_notnum < 2:
                 yes_or_not = input()
-                if (yes_or_not == 'Да') and (yes_or_not == 'да'):
+                if (yes_or_not == 'Да') or (yes_or_not == 'да'):
                     toknum = toknum + 3
                     break
-                if (yes_or_not == 'Нет') and (yes_or_not == 'нет'):
+                if (yes_or_not == 'Нет') or (yes_or_not == 'нет'):
                     print('')
                     break
                 else:
                     print('Введите (Да) или (Нет)')
+        f = open(os.getenv('APPDATA') + '\TurnOffBot\\token', 'w')
         f.write(tokenin)
         f.close()
 
