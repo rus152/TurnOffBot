@@ -5,7 +5,47 @@ import win10toast
 
 
 def main():
-    bot = telebot.TeleBot("5308870252:AAGVqh0BSRIoywcVSTHkG0WuWAR_UXZ42PQ")
+
+    try:
+        f = open(os.getenv('APPDATA') + '\TurnOffBot\\token', 'r')
+        f.close()
+    except (IOError) and (Exception):
+        print('Файл токена не найден. Начинается первоначальная настройка')
+        try:
+            os.mkdir(os.getenv('APPDATA') + '\TurnOffBot')
+        except (IOError) and (Exception):
+            print()
+        f = open(os.getenv('APPDATA') + '\TurnOffBot\\token', 'w')
+        print('')
+        toknum = int()
+        while toknum < 3:
+            print('Введете свой токен. (Взять токен для своего бота можно у оффициального бота BotFather)')
+            tokenin = input()
+            print('')
+            toknum == 0
+            print(
+                'Ваш токен: ' + tokenin + '? Это верно?(Для избежания дальнейших пролем с запуском, удостоверьтесь, что токен введён правильно)')
+            print('')
+            yes_or_notnum = int()
+            while yes_or_notnum < 2:
+                yes_or_not = input()
+                if yes_or_not == 'Да':
+                    toknum = toknum + 3
+                    break
+                if yes_or_not == 'Нет':
+                    break
+                else:
+                    print('Введите (Да) или (Нет)')
+        f.write(tokenin)
+        f.close()
+
+        print('Первоначальная настройка завершена.')
+
+    ff = open(os.getenv('APPDATA') + '\TurnOffBot\\token', 'r')
+    token = ff.read()
+    f.close()
+
+    bot = telebot.TeleBot(token)
 
     print('Типо запуск')
 
@@ -54,52 +94,62 @@ def main():
             bot.reply_to(message, "Возврат", parse_mode='html', reply_markup=markup)
             return
 
-        if int(txt) >= 18000:
-            cas = int(txt) / 3600
-            print(cas)
-            bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часов", parse_mode='html',
-                         reply_markup=markup)
+        try:
+            if int(txt) >= 18000:
+                cas = int(txt) / 3600
+                print(cas)
+                bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часов 🕑",
+                             parse_mode='html',
+                             reply_markup=markup)
 
-        if (int(txt) >= 7200) and (int(txt) < 18000):
-            cas = int(txt) / 3600
-            print(cas)
-            bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часа", parse_mode='html',
-                         reply_markup=markup)
+            if (int(txt) >= 7200) and (int(txt) < 18000):
+                cas = int(txt) / 3600
+                print(cas)
+                bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " часа 🕑", parse_mode='html',
+                             reply_markup=markup)
 
-        if (int(txt) > 3599) and (int(txt) < 7200):
-            cas = int(txt) / 3600
-            print(cas)
-            bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " час", parse_mode='html',
-                         reply_markup=markup)
+            if (int(txt) > 3599) and (int(txt) < 7200):
+                cas = int(txt) / 3600
+                print(cas)
+                bot.reply_to(message, "Компьютер выключится через " + str(round(int(cas))) + " час 🕑", parse_mode='html',
+                             reply_markup=markup)
 
-        if (int(txt) > 30) and (int(txt) < 120):
-            minu = int(txt) / 60
-            print(minu)
-            bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минуту", parse_mode='html',
-                         reply_markup=markup)
+            if (int(txt) > 60) and (int(txt) < 120):
+                minu = int(txt) / 60
+                print(minu)
+                bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минуту 🕑",
+                             parse_mode='html',
+                             reply_markup=markup)
 
-        if (int(txt) > 119) and (int(txt) < 300):
-            minu = int(txt) / 60
-            print(minu)
-            bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минуты", parse_mode='html',
-                         reply_markup=markup)
+            if (int(txt) > 119) and (int(txt) < 300):
+                minu = int(txt) / 60
+                print(minu)
+                bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минуты 🕑",
+                             parse_mode='html',
+                             reply_markup=markup)
 
-        if (int(txt) > 299) and (int(txt) < 3600):
-            minu = int(txt) / 60
-            print(minu)
-            bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минут", parse_mode='html',
-                         reply_markup=markup)
+            if (int(txt) > 299) and (int(txt) < 3600):
+                minu = int(txt) / 60
+                print(minu)
+                bot.reply_to(message, "Компьютер выключится через " + str(round(int(minu))) + " минут 🕑",
+                             parse_mode='html',
+                             reply_markup=markup)
 
-        if (int(txt) > 0) and (int(txt) < 31):
-            minu = int(txt) / 60
-            print(minu)
-            bot.reply_to(message, "Компьютер выключится через " + txt + " секунд", parse_mode='html',
-                         reply_markup=markup)
+            if (int(txt) > 0) and (int(txt) < 61):
+                minu = int(txt) / 60
+                print(minu)
+                bot.reply_to(message, "Компьютер выключится через " + txt + " секунд 🕑", parse_mode='html',
+                             reply_markup=markup)
 
-        if int(txt) == 0:
-            bot.reply_to(message, "Компьютер отключается", parse_mode='html',
+            if int(txt) == 0:
+                bot.reply_to(message, "Компьютер отключается ", parse_mode='html',
+                             reply_markup=markup)
+            os.system('shutdown /s /t ' + txt)
+
+        except Exception:
+            bot.reply_to(message, "Произошла ошибка, скорее всего вы ввели буквы. Но может оказаться так, что это и другая ошибка 🤬", parse_mode='html',
                          reply_markup=markup)
-        os.system('shutdown /s /t ' + txt)
+            return
 
     @bot.message_handler(commands=['cancel'])
     def send(message):
@@ -110,7 +160,7 @@ def main():
     def send(message):
         bot.reply_to(message, "В данный момент комп онлайн", )
         toaster = win10toast.ToastNotifier()
-        toaster.show_toast("Ботяра", "Все знают, что комп онлайн", icon_path="PC-Computer-Deltarune-Spamton.ico")
+        toaster.show_toast("Ботяра 🔔", "Все знают, что комп онлайн", icon_path="PC-Computer-Deltarune-Spamton.ico")
 
     bot.polling(none_stop=True)
 
