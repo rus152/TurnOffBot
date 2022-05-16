@@ -60,8 +60,9 @@ def main():
         but1 = types.KeyboardButton("/shutdown")
         but2 = types.KeyboardButton("/Online")
         but3 = types.KeyboardButton("/hiberdown")
+        but5 = types.KeyboardButton("/Screen")
         but4 = types.KeyboardButton("/cancel")
-        markup.add(but1, but2, but3, but4)
+        markup.add(but1, but2, but3, but5, but4)
         bot.reply_to(message, "Вывод кнопок", parse_mode='html', reply_markup=markup)
 
     @bot.message_handler(commands=['hiberdown'])
@@ -91,8 +92,9 @@ def main():
         but1 = types.KeyboardButton("/shutdown")
         but2 = types.KeyboardButton("/Online")
         but3 = types.KeyboardButton("/hiberdown")
+        but5 = types.KeyboardButton("/Screen")
         but4 = types.KeyboardButton("/cancel")
-        markup.add(but1, but2, but3, but4)
+        markup.add(but1, but2, but3, but5, but4)
 
         if txt == "Назад":
             bot.reply_to(message, "Возврат", parse_mode='html', reply_markup=markup)
