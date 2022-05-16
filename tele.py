@@ -2,6 +2,7 @@ import telebot
 from telebot import types
 import os
 import win10toast
+from mss import mss
 
 
 def main():
@@ -164,6 +165,19 @@ def main():
         bot.reply_to(message, "В данный момент комп онлайн", )
         toaster = win10toast.ToastNotifier()
         toaster.show_toast("Ботяра 🔔", "Все знают, что комп онлайн", icon_path="icon.ico")
+
+    @bot.message_handler(commands=['Screen'])
+    def send(message):
+        bot.reply_to(message, "Запрос отправлен", )
+        for i in range(1,3):
+            mss().shot(mon=i)
+        toaster = win10toast.ToastNotifier()
+        toaster.show_toast("Ботяра 🔔", "Запрос на скриншот", icon_path="icon.ico")
+        bot.send_message(message.chat.id, 'Скриншот сделан')
+        bot.send_document(message.chat.id, document=open('monitor-1.png', 'rb'))
+        bot.send_document(message.chat.id, document=open('monitor-2.png', 'rb'))
+        os.remove('monitor-1.png')
+        os.remove('monitor-2.png')
 
     bot.polling(none_stop=True)
 
