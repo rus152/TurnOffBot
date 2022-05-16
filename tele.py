@@ -169,15 +169,24 @@ def main():
     @bot.message_handler(commands=['Screen'])
     def send(message):
         bot.reply_to(message, "Запрос отправлен", )
-        for i in range(1,3):
-            mss().shot(mon=i)
+        mss().shot(mon=1)
+        try:
+            mss().shot(mon=2)
+        except Exception:
+            print("")
         toaster = win10toast.ToastNotifier()
         toaster.show_toast("Ботяра 🔔", "Запрос на скриншот", icon_path="icon.ico")
         bot.send_message(message.chat.id, 'Скриншот сделан')
         bot.send_document(message.chat.id, document=open('monitor-1.png', 'rb'))
-        bot.send_document(message.chat.id, document=open('monitor-2.png', 'rb'))
+        try:
+            bot.send_document(message.chat.id, document=open('monitor-2.png', 'rb'))
+        except Exception:
+            print('')
         os.remove('monitor-1.png')
-        os.remove('monitor-2.png')
+        try:
+            os.remove('monitor-2.png')
+        except Exception:
+            print('')
 
     bot.polling(none_stop=True)
 
