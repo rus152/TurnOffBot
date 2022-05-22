@@ -6,6 +6,7 @@ from mss import mss
 from rich import print
 from rich.console import Console
 import auto
+import Internet
 
 console = Console()
 
@@ -18,11 +19,16 @@ def main():
     except (IOError) and (Exception):
         auto.auto()
 
+    Internet.main()
+
+
     print('Made by rus152')
     print('')
     ff = open(os.getenv('APPDATA') + '\TurnOffBot\\token', 'r')
     token = ff.read()
     ff.close()
+
+
 
     bot = telebot.TeleBot(token)
 
