@@ -48,14 +48,20 @@ def main():
                 but2 = types.KeyboardButton("/Online")
                 but3 = types.KeyboardButton("/hiberdown")
                 but5 = types.KeyboardButton("/Screen")
+                but6 = types.KeyboardButton("/lock🔒")
                 but4 = types.KeyboardButton("/cancel")
-                markup.add(but1, but2, but3, but5, but4)
+                markup.add(but1, but2, but3, but5, but6, but4)
                 bot.reply_to(message, "Вывод кнопок", parse_mode='html', reply_markup=markup)
 
             @bot.message_handler(commands=['hiberdown'])
             def send(message):
                 bot.reply_to(message, "Комп переходит в режим гибернации", )
                 os.system('shutdown /h')
+
+            @bot.message_handler(commands=['lock🔒'])
+            def send(message):
+                bot.reply_to(message, "Блокировка компа 🔒", )
+                os.system('rundll32.exe user32.dll, LockWorkStation')
 
             @bot.message_handler(commands=['shutdown'])
             def send(message):
@@ -80,8 +86,9 @@ def main():
                 but2 = types.KeyboardButton("/Online")
                 but3 = types.KeyboardButton("/hiberdown")
                 but5 = types.KeyboardButton("/Screen")
+                but6 = types.KeyboardButton("/lock🔒")
                 but4 = types.KeyboardButton("/cancel")
-                markup.add(but1, but2, but3, but5, but4)
+                markup.add(but1, but2, but3, but5, but6, but4)
 
                 if txt == "Назад":
                     bot.reply_to(message, "Возврат", parse_mode='html', reply_markup=markup)
